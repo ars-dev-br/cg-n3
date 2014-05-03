@@ -34,6 +34,11 @@ namespace ars {
          * Creates a new point with coordinates (x, y, z, 1).
          */
         Point(double x, double y, double z);
+
+        /**
+         * Creates a new point with coordinates (x, y, z, w).
+         */
+        Point(double x, double y, double z, double w);
     };
 
 }

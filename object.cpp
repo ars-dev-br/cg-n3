@@ -16,7 +16,7 @@
 namespace ars {
 
     Object::Object()
-        : renderBBox(false) { }
+        : isSelected(false) { }
 
     void Object::render() const {
         glPushMatrix();
@@ -37,7 +37,7 @@ namespace ars {
             it->render();
         }
 
-        if (renderBBox) {
+        if (isSelected) {
             Object bboxObject = boundingBoxToObject(bbox);
             bboxObject.render();
         }
@@ -57,4 +57,19 @@ namespace ars {
         this->color = color;
     }
 
+    void Object::select() {
+        isSelected = true;
+    }
+
+    void Object::deselect() {
+        isSelected = false;
+    }
+
+    void Object::resetTransform() {
+        transform = Transform();
+    }
+
+    void Object::applyTransform(const Transform& transform) {
+        this->transform = transform * this->transform;
+    }
 }

@@ -25,8 +25,13 @@ namespace ars {
      * @see ars::boundingBoxToObject
      */
     class BoundingBox {
-    private:
+    public:
         Point min, max;
+
+        /**
+         * The center point of this bounding box.
+         */
+        Point center() const;
     };
 }
 

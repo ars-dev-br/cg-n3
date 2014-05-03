@@ -1,5 +1,5 @@
 CPP = g++
-CPPFLAGS = -Wall -Wextra -c -g --std=c++11
+CPPFLAGS = -O2 -Wall -Wextra -c -g --std=c++11
 LDFLAGS =
 LIBS = -lm -lGL -lglut -lGLU
 

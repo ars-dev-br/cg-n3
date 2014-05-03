@@ -11,4 +11,7 @@ namespace ars {
     Point::Point(double x, double y, double z)
         : x(x), y(y), z(z), w(1) { }
 
+    Point::Point(double x, double y, double z, double w)
+        : x(x), y(y), z(z), w(w) { }
+
 }

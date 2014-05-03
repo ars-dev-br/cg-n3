@@ -32,7 +32,7 @@ namespace ars {
         std::vector<Object> children;
         std::vector<Point> points;
 
-        bool renderBBox;
+        bool isSelected;
 
     public:
         /**
@@ -59,6 +59,26 @@ namespace ars {
          * Set this object color.
          */
         void setColor(const Color& color);
+
+        /**
+         * Set this object as selected (shows the BBox).
+         */
+        void select();
+
+        /**
+         * Deselect this object.
+         */
+        void deselect();
+
+        /**
+         * Reset this object transform back to identity.
+         */
+        void resetTransform();
+
+        /**
+         * Apply a transform to object (accumulates with existing transforms).
+         */
+        void applyTransform(const Transform& transform);
     };
 
 }
