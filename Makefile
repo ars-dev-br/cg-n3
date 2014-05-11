@@ -1,6 +1,6 @@
 CPP = g++
-CPPFLAGS = -O2 -Wall -Wextra -c -g --std=c++11
-LDFLAGS =
+CPPFLAGS = -flto -O3 -Wall -Wextra -c -g --std=c++11
+LDFLAGS = -flto
 LIBS = -lm -lGL -lglut -lGLU
 
 DEPS = $(wildcard *.hpp)

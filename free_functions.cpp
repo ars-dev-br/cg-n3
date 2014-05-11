@@ -1,5 +1,9 @@
 #include "free_functions.hpp"
 
+#include "bounding_box.hpp"
+#include "object.hpp"
+#include "point.hpp"
+
 namespace ars {
 
     Object boundingBoxToObject(const BoundingBox& bbox) {
@@ -32,6 +36,14 @@ namespace ars {
         axes.addChild(xAxis);
 
         return axes;
+    }
+
+    double dist(const Point& lhs, const Point& rhs) {
+        double x = lhs.x - rhs.x;
+        double y = lhs.y - rhs.y;
+        double z = lhs.z - rhs.z;
+
+        return x*x + y*y + z*z;
     }
 
 }

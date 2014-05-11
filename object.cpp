@@ -13,7 +13,11 @@
 #include <GL/glut.h>
 #endif
 
+#include <algorithm>
+
 namespace ars {
+
+    const double SELECTION_DISTANCE = 5 * 5;
 
     Object::Object()
         : isSelected(false), primitive(GL_LINE_STRIP) { }
@@ -51,6 +55,8 @@ namespace ars {
         if (points.size() == 1) {
             points.push_back(point);
         }
+
+        updateBBox();
     }
 
     void Object::fakePoint(const Point& point) {
@@ -98,5 +104,62 @@ namespace ars {
         } else {
             primitive = GL_LINE_STRIP;
         }
+    }
+
+    void Object::removePoint(const Point& point) {
+        std::remove(std::begin(points), std::end(points), point);
+
+        updateBBox();
+    }
+
+    Point* Object::pointNear(const Point& point) {
+        for(auto it = std::begin(points); it != std::end(points); ++it) {
+            if (dist(*it, point) <= SELECTION_DISTANCE) {
+                return &(*it);
+            }
+        }
+
+        return nullptr;
+    }
+
+    void Object::updateBBox() {
+        bbox.update(points);
+    }
+
+    bool Object::contains(const Point& point) {
+        if (!bbox.contains(point)) {
+            return false;
+        }
+
+        int intersections = 0;
+        for(size_t i = 0; i < points.size(); ++i) {
+            Point objPointA = points[i];
+            Point objPointB = points[(i + 1) % points.size()];
+
+            if (objPointA.y != objPointB.y) {
+                double t = (point.y - objPointA.y)
+                            / (objPointB.y - objPointA.y);
+                Point intersect(objPointA.x + ((objPointB.x - objPointA.x) * t),
+                                point.y);
+
+                if (intersect.x == point.x) {
+                    return true;
+                } else if (intersect.x > point.x && t >= 0 && t <= 1) {
+                    ++intersections;
+                }
+            } else if (objPointA.y == point.y
+                       && point.x >= std::min(objPointA.x, objPointB.x)
+                       && point.x <= std::max(objPointA.x, objPointB.x)) {
+                return true;
+            }
+        }
+
+        return intersections % 2 != 0;
+    }
+
+    // For keeping things fast, we consider two objects to be equal if
+    // they have the same bounding box.
+    bool Object::operator ==(const Object& rhs) {
+        return bbox == rhs.bbox;
     }
 }

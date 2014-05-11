@@ -41,6 +41,10 @@ namespace ars {
         Point(double x, double y, double z, double w);
     };
 
+    /**
+     * Compares two points for equality.
+     */
+    bool operator ==(const Point& lhs, const Point& rhs);
 }
 
 #endif

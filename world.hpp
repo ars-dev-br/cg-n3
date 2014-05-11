@@ -74,6 +74,17 @@ namespace ars {
          * Adds sketch object to objects list.
          */
         void addSketchObject();
+
+        /**
+         * Returns the object under a given point.  It may return nullptr if
+         * no object was selected.
+         */
+        Object* objectUnder(const Point& point);
+
+        /**
+         * Removes a object that equals the parameter.
+         */
+        void removeObject(const Object& object);
     };
 
 }

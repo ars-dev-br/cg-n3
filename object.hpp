@@ -65,7 +65,7 @@ namespace ars {
 
         /**
          * Adds a fake point to this object (so the user can see what'll
-         * happen when it inserts this point).
+         * happen when they insert this point).
          */
         void fakePoint(const Point& point);
 
@@ -108,8 +108,34 @@ namespace ars {
          * Toggles if it should be an open or closed polygon.
          */
         void toggleOpenClosed();
-    };
 
+        /**
+         * Removes a point that equals the parameter.
+         */
+        void removePoint(const Point& point);
+
+        /**
+         * Returns a point near to a given point.  It may return nullptr if
+         * no point was selected.
+         */
+        Point* pointNear(const Point& point);
+
+        /**
+         * Updates the bounding box after the points have been edited.
+         */
+        void updateBBox();
+
+        /**
+         * Checks if a given point is inside the object.
+         */
+        bool contains(const Point& point);
+
+        /**
+         * Comparates two objects for equality.
+         */
+        bool operator ==(const Object& rhs);
+
+    };
 }
 
 #endif

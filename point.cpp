@@ -14,4 +14,10 @@ namespace ars {
     Point::Point(double x, double y, double z, double w)
         : x(x), y(y), z(z), w(w) { }
 
+    bool operator == (const Point& lhs, const Point& rhs) {
+        return lhs.x == rhs.x
+            && lhs.y == rhs.y
+            && lhs.z == rhs.z
+            && lhs.w == rhs.w;
+    }
 }

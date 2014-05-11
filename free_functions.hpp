@@ -6,13 +6,14 @@
 #ifndef ARS_FREE_FUNCTIONS_HPP
 #define ARS_FREE_FUNCTIONS_HPP
 
-#include "bounding_box.hpp"
-#include "object.hpp"
-
 /**
  * Personal namespace for this project.
  */
 namespace ars {
+
+    class BoundingBox;
+    class Object;
+    class Point;
 
     /**
      * Creates a graphical representation of a bounding box.
@@ -25,6 +26,11 @@ namespace ars {
      * Creates a graphical object with the reference axes.
      */
     Object referenceAxes();
+
+    /**
+     * Calculates the **squared** distance between two points.
+     */
+    double dist(const Point& lhs, const Point& rhs);
 
 }
 

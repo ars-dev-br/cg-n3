@@ -32,7 +32,23 @@ namespace ars {
          * The center point of this bounding box.
          */
         Point center() const;
+
+        /**
+         * Updates the bounding box so it spans all the given points.
+         */
+        void update(const std::vector<Point>& points);
+
+        /**
+         * Checks if the given point is inside this bounding box.
+         */
+        bool contains(const Point& point) const;
     };
+
+    /**
+     * Compares two bounding boxes for equality.
+     */
+    bool operator ==(const BoundingBox& lhs, const BoundingBox& rhs);
+
 }
 
 #endif

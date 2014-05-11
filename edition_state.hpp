@@ -21,6 +21,8 @@ namespace ars {
     private:
         typedef ApplicationState base;
 
+        Object* currentObject;
+        Point* currentPoint;
     public:
         EditionState(World& world);
 

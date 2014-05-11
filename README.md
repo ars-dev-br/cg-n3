@@ -33,7 +33,7 @@ This application is mostly keyboard driven.  Here are the valid commands:
 * `Space bar`: Alternates between open or closed polygon.
 
 In addition to the global keyboard commands, the application has two modes.
-They have unique keybindings, documented below:
+They have unique keybindings, documented below.
 
 ### Addition mode
 
@@ -42,3 +42,14 @@ They have unique keybindings, documented below:
 * `RMB`: Finishes the current polygon.
 
 ### Edition mode
+
+* `LMB`: Selects a polygon (and possibly one of its points).
+* `RMB`: If a point is selected, saves its current position.
+
+* `D`: If a point is selected, deletes it.
+* `R`: Starts applying rotation transform (use the arrow keys to control).
+* `S`: Starts applying scale transform (use the arrow keys to control).
+* `T`: Starts applying translation transform (use the arrow keys to control).
+* `Backspace`: Deletes selected polygon.
+* `Esc`: Cancels selection.
+* `Home`: Resets a polygon transform.

@@ -15,6 +15,8 @@
 #include <GL/glut.h>
 #endif
 
+#include <algorithm>
+
 namespace ars {
 
     World::World()
@@ -86,5 +88,19 @@ namespace ars {
         objects.push_back(*sketch);
         delete sketch;
         sketch = nullptr;
+    }
+
+    Object* World::objectUnder(const Point& point) {
+        for(auto it = std::begin(objects); it != std::end(objects); ++it) {
+            if (it->contains(point)) {
+                return &(*it);
+            }
+        }
+
+        return nullptr;
+    }
+
+    void World::removeObject(const Object& object) {
+        std::remove(std::begin(objects), std::end(objects), object);
     }
 }
