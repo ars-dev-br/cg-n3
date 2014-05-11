@@ -23,6 +23,12 @@ namespace ars {
 
         Object* currentObject;
         Point* currentPoint;
+
+        char transform;
+
+        void translate(int key);
+        void rotate(int key);
+        void scale(int key);
     public:
         EditionState(World& world);
 

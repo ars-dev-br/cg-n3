@@ -45,6 +45,11 @@ namespace ars {
      * Compares two points for equality.
      */
     bool operator ==(const Point& lhs, const Point& rhs);
+
+    /**
+     * Inverts a point.
+     */
+    Point operator -(const Point& rhs);
 }
 
 #endif

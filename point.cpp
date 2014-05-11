@@ -20,4 +20,8 @@ namespace ars {
             && lhs.z == rhs.z
             && lhs.w == rhs.w;
     }
+
+    Point operator -(const Point& rhs) {
+        return Point(-1*rhs.x, -1*rhs.y, -1*rhs.z);
+    }
 }

@@ -67,9 +67,9 @@ namespace ars {
     Transform Transform::translation(const Point& translation) {
         Transform t;
 
-        t.matrix[0][3] = translation.x;
-        t.matrix[1][3] = translation.y;
-        t.matrix[2][3] = translation.z;
+        t.matrix[3][0] = translation.x;
+        t.matrix[3][1] = translation.y;
+        t.matrix[3][2] = translation.z;
 
         return t;
     }
@@ -88,8 +88,8 @@ namespace ars {
         Transform t;
 
         t.matrix[1][1] = std::cos(rad);
-        t.matrix[1][2] = -1 * std::sin(rad);
-        t.matrix[2][1] = std::sin(rad);
+        t.matrix[2][1] = -1 * std::sin(rad);
+        t.matrix[1][2] = std::sin(rad);
         t.matrix[2][2] = std::cos(rad);
 
         return t;
@@ -99,8 +99,8 @@ namespace ars {
         Transform t;
 
         t.matrix[0][0] = std::cos(rad);
-        t.matrix[0][2] = std::sin(rad);
-        t.matrix[2][0] = -1 * std::sin(rad);
+        t.matrix[2][0] = std::sin(rad);
+        t.matrix[0][2] = -1 * std::sin(rad);
         t.matrix[2][2] = std::cos(rad);
 
         return t;
@@ -110,8 +110,8 @@ namespace ars {
         Transform t;
 
         t.matrix[0][0] = std::cos(rad);
-        t.matrix[0][1] = -1 * std::sin(rad);
-        t.matrix[1][0] = std::sin(rad);
+        t.matrix[1][0] = -1 * std::sin(rad);
+        t.matrix[0][1] = std::sin(rad);
         t.matrix[1][1] = std::cos(rad);
 
         return t;

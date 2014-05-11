@@ -26,8 +26,12 @@ namespace ars {
         glPushMatrix();
         glMultMatrixd(transform.getData());
 
-        glColor3fv(color.getData());
+        if (isSelected) {
+            Object bboxObject = boundingBoxToObject(bbox);
+            bboxObject.render();
+        }
 
+        glColor3fv(color.getData());
         glLineWidth(1);
         glBegin(primitive);
         {
@@ -39,11 +43,6 @@ namespace ars {
 
         for(auto it = std::begin(children); it != std::end(children); ++it) {
             it->render();
-        }
-
-        if (isSelected) {
-            Object bboxObject = boundingBoxToObject(bbox);
-            bboxObject.render();
         }
 
         glPopMatrix();
@@ -108,7 +107,6 @@ namespace ars {
 
     void Object::removePoint(const Point& point) {
         std::remove(std::begin(points), std::end(points), point);
-
         updateBBox();
     }
 
@@ -161,5 +159,9 @@ namespace ars {
     // they have the same bounding box.
     bool Object::operator ==(const Object& rhs) {
         return bbox == rhs.bbox;
+    }
+
+    Point Object::center() const {
+        return bbox.center();
     }
 }

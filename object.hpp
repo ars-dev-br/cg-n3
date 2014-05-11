@@ -135,6 +135,11 @@ namespace ars {
          */
         bool operator ==(const Object& rhs);
 
+        /**
+         * The object center.
+         */
+        Point center() const;
+
     };
 }
 
