@@ -9,6 +9,7 @@
 #include "application_state.hpp"
 #include "addition_state.hpp"
 #include "edition_state.hpp"
+#include "point.hpp"
 
 #ifdef __APPLE__
 #include <OpenGL/gl.h>
@@ -90,7 +91,7 @@ void display() {
 
 void keyboard(unsigned char key, int x, int y) {
     key = std::tolower(key);
-    int invertedY = -y;
+    ars::Point point = world.normalize(x, y);
 
     switch (key) {
     case 'e':
@@ -102,7 +103,7 @@ void keyboard(unsigned char key, int x, int y) {
         break;
 
     default:
-        currentState->keyboard(key, x, invertedY);
+        currentState->keyboard(key, point);
         break;
     }
 
@@ -110,16 +111,16 @@ void keyboard(unsigned char key, int x, int y) {
 }
 
 void mouse(int button, int state, int x, int y) {
-    int invertedY = -y;
+    ars::Point point = world.normalize(x, y);
 
-    currentState->mouse(button, state, x, invertedY);
+    currentState->mouse(button, state, point);
     glutPostRedisplay();
 }
 
 void passiveMotion(int x, int y) {
-    int invertedY = -y;
+    ars::Point point = world.normalize(x, y);
 
-    currentState->passiveMotion(x, invertedY);
+    currentState->passiveMotion(point);
     glutPostRedisplay();
 }
 
@@ -129,8 +130,8 @@ void reshape(int width, int height) {
 }
 
 void special(int key, int x, int y) {
-    int invertedY = -y;
+    ars::Point point = world.normalize(x, y);
 
-    currentState->special(key, x, invertedY);
+    currentState->special(key, point);
     glutPostRedisplay();
 }

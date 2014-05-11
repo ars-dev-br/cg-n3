@@ -13,6 +13,18 @@
 
 #include <vector>
 
+#ifdef __APPLE__
+#include <OpenGL/gl.h>
+#include <GLUT/glut.h>
+#elif WIN32
+#include <windows.h>
+#include <GL/gl.h>
+#include <GL/glut.h>
+#elif __linux__
+#include <GL/gl.h>
+#include <GL/glut.h>
+#endif
+
 namespace ars {
 
     /**
@@ -33,6 +45,7 @@ namespace ars {
         std::vector<Point> points;
 
         bool isSelected;
+        GLenum primitive;
 
     public:
         /**
@@ -46,39 +59,55 @@ namespace ars {
         void render() const;
 
         /**
-         * Add point to object.
+         * Adds point to object.
          */
         void addPoint(const Point& point);
 
         /**
-         * Add child object to object.
+         * Adds a fake point to this object (so the user can see what'll
+         * happen when it inserts this point).
+         */
+        void fakePoint(const Point& point);
+
+        /**
+         * Removes the last (and fake) point.
+         */
+        void removeFakePoint();
+
+        /**
+         * Adds child object to object.
          */
         void addChild(const Object& object);
 
         /**
-         * Set this object color.
+         * Sets this object color.
          */
         void setColor(const Color& color);
 
         /**
-         * Set this object as selected (shows the BBox).
+         * Sets this object as selected (shows the BBox).
          */
         void select();
 
         /**
-         * Deselect this object.
+         * Deselects this object.
          */
         void deselect();
 
         /**
-         * Reset this object transform back to identity.
+         * Resets this object transform back to identity.
          */
         void resetTransform();
 
         /**
-         * Apply a transform to object (accumulates with existing transforms).
+         * Applies a transform to object (accumulates with existing transforms).
          */
         void applyTransform(const Transform& transform);
+
+        /**
+         * Toggles if it should be an open or closed polygon.
+         */
+        void toggleOpenClosed();
     };
 
 }

@@ -20,3 +20,25 @@ This project uses a simple Makefile.  You can:
 * `make clean`: removes compilation files;
 * `make cleandoc`: removes documentation files and;
 * `make doc`: generates documentation using Doxygen.
+
+## Keyboard commands
+
+This application is mostly keyboard driven.  Here are the valid commands:
+
+* `A`: Enters addition mode.
+* `C`: Changes current polygon color (picks a random color).
+* `E`: Enters edition mode.
+* `+`, `=`: Zooms In.
+* `-`: Zooms Out.
+* `Space bar`: Alternates between open or closed polygon.
+
+In addition to the global keyboard commands, the application has two modes.
+They have unique keybindings, documented below:
+
+### Addition mode
+
+* `LMB`: Adds a new point to the current polygon.  If no polygon is active,
+  creates a new one.
+* `RMB`: Finishes the current polygon.
+
+### Edition mode

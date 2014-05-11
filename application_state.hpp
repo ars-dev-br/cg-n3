@@ -6,6 +6,7 @@
 #ifndef ARS_APPLICATION_STATE_HPP
 #define ARS_APPLICATION_STATE_HPP
 
+#include "point.hpp"
 #include "world.hpp"
 
 namespace ars {
@@ -42,17 +43,17 @@ namespace ars {
          * Handles a "normal" keypress.
          * @see special
          */
-        virtual void keyboard(unsigned char key, int x, int y);
+        virtual void keyboard(unsigned char key, const Point& point);
 
         /**
          * Handles a mouse event.
          */
-        virtual void mouse(int button, int state, int x, int y) = 0;
+        virtual void mouse(int button, int state, const Point& point) = 0;
 
         /**
          * Handles mouse movement.
          */
-        virtual void passiveMotion(int x, int y) = 0;
+        virtual void passiveMotion(const Point& point) = 0;
 
         /**
          * Handles a window resize.
@@ -62,7 +63,7 @@ namespace ars {
         /**
          * Handles special keypresses.
          */
-        virtual void special(int key, int x, int y) = 0;
+        virtual void special(int key, const Point& point) = 0;
 
     private:
         // Don't let copies be made.

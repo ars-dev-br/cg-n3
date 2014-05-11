@@ -33,6 +33,11 @@ namespace ars {
          * Returns the color as an array of floats
          */
         const float* getData() const;
+
+        /**
+         * Creates a random RGB color.
+         */
+        static Color random();
     };
 
     const Color BLACK(0.0f, 0.0f, 0.0f);

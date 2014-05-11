@@ -19,6 +19,7 @@ namespace ars {
 
     World::World()
         : minX(-250), minY(-250), maxX(250), maxY(250),
+          canvasW(500), canvasH(500), sketch(nullptr),
           referenceAxes(ars::referenceAxes()) { }
 
     void World::zoomIn() {
@@ -54,6 +55,10 @@ namespace ars {
             it->render();
         }
 
+        if(sketch != nullptr) {
+            sketch->render();
+        }
+
         glutSwapBuffers();
     }
 
@@ -63,5 +68,23 @@ namespace ars {
 
     double World::width() const {
         return maxX - minX;
+    }
+
+    Point World::normalize(int xx, int yy) {
+        double x = minX + (xx / static_cast<double>(canvasW)) * width();
+        double y = minY + (yy / static_cast<double>(canvasH)) * height();
+
+        return Point(x, -y);
+    }
+
+    Object* World::sketchObject() {
+        sketch = new Object();
+        return sketch;
+    }
+
+    void World::addSketchObject() {
+        objects.push_back(*sketch);
+        delete sketch;
+        sketch = nullptr;
     }
 }

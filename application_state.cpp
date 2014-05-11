@@ -1,5 +1,6 @@
 #include "application_state.hpp"
 
+#include "point.hpp"
 #include "world.hpp"
 
 namespace ars {
@@ -16,7 +17,7 @@ namespace ars {
         world.render();
     }
 
-    void ApplicationState::keyboard(unsigned char key, int x, int y) {
+    void ApplicationState::keyboard(unsigned char key, const Point& point) {
         switch (key) {
         case '-':
             world.zoomOut();

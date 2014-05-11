@@ -7,7 +7,7 @@
 #define ARS_WORLD_HPP
 
 #include "object.hpp"
-#include "free_functions.hpp"
+#include "point.hpp"
 
 #include <vector>
 
@@ -25,7 +25,9 @@ namespace ars {
     private:
         double minX, minY, maxX, maxY;
         std::vector<Object> objects;
+        int canvasW, canvasH;
 
+        Object* sketch;
         Object referenceAxes;
     public:
         /**
@@ -57,6 +59,21 @@ namespace ars {
          * The world width in pixels.
          */
         double width() const;
+
+        /**
+         * Normalizes a point according to canvas size and camera zoom.
+         */
+        Point normalize(int x, int y);
+
+        /**
+         * Creates a new sketch object and returns it.
+         */
+        Object* sketchObject();
+
+        /**
+         * Adds sketch object to objects list.
+         */
+        void addSketchObject();
     };
 
 }

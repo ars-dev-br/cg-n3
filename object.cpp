@@ -16,7 +16,7 @@
 namespace ars {
 
     Object::Object()
-        : isSelected(false) { }
+        : isSelected(false), primitive(GL_LINE_STRIP) { }
 
     void Object::render() const {
         glPushMatrix();
@@ -25,7 +25,7 @@ namespace ars {
         glColor3fv(color.getData());
 
         glLineWidth(1);
-        glBegin(GL_LINES);
+        glBegin(primitive);
         {
             for(auto it = std::begin(points); it != std::end(points); ++it) {
                 glVertex3d(it->x, it->y, it->z);
@@ -47,6 +47,25 @@ namespace ars {
 
     void Object::addPoint(const Point& point) {
         points.push_back(point);
+
+        if (points.size() == 1) {
+            points.push_back(point);
+        }
+    }
+
+    void Object::fakePoint(const Point& point) {
+        if (points.size() == 0) {
+            return;
+        }
+
+        Point& p = points.back();
+
+        p.x = point.x;
+        p.y = point.y;
+    }
+
+    void Object::removeFakePoint() {
+        points.pop_back();
     }
 
     void Object::addChild(const Object& child) {
@@ -71,5 +90,13 @@ namespace ars {
 
     void Object::applyTransform(const Transform& transform) {
         this->transform = transform * this->transform;
+    }
+
+    void Object::toggleOpenClosed() {
+        if (primitive == GL_LINE_STRIP) {
+            primitive = GL_LINE_LOOP;
+        } else {
+            primitive = GL_LINE_STRIP;
+        }
     }
 }

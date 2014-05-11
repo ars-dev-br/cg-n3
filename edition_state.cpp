@@ -7,21 +7,21 @@ namespace ars {
     EditionState::EditionState(World& world)
         : base(world) { }
 
-    void EditionState::keyboard(unsigned char key, int x, int y) {
+    void EditionState::keyboard(unsigned char key, const Point& point) {
         switch (key) {
         default:
-            base::keyboard(key, x, y);
+            base::keyboard(key, point);
             break;
         }
     }
 
-    void EditionState::mouse(int button, int state, int x, int y) {
+    void EditionState::mouse(int button, int state, const Point& point) {
     }
 
-    void EditionState::passiveMotion(int x, int y) {
+    void EditionState::passiveMotion(const Point& point) {
     }
 
-    void EditionState::special(int key, int x, int y) {
+    void EditionState::special(int key, const Point& point) {
     }
 
 }

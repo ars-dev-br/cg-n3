@@ -7,6 +7,7 @@
 #define ARS_ADDITION_STATE_HPP
 
 #include "application_state.hpp"
+#include "object.hpp"
 #include "world.hpp"
 
 namespace ars {
@@ -20,13 +21,14 @@ namespace ars {
     private:
         typedef ApplicationState base;
 
+        Object* currentObject;
     public:
         AdditionState(World& world);
 
-        virtual void keyboard(unsigned char key, int x, int y);
-        virtual void mouse(int button, int state, int x, int y);
-        virtual void passiveMotion(int x, int y);
-        virtual void special(int key, int x, int y);
+        virtual void keyboard(unsigned char key, const Point& point);
+        virtual void mouse(int button, int state, const Point& point);
+        virtual void passiveMotion(const Point& point);
+        virtual void special(int key, const Point& point);
     };
 
 }

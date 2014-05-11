@@ -1,5 +1,12 @@
 #include "color.hpp"
 
+#include <random>
+
+static std::random_device rd;
+static std::mt19937 gen(rd());
+static std::uniform_real_distribution<double> dist;
+
+
 namespace ars {
 
     Color::Color()
@@ -10,5 +17,9 @@ namespace ars {
 
     const float* Color::getData() const {
         return reinterpret_cast<const float*>(this);
+    }
+
+    Color Color::random() {
+        return Color(dist(gen), dist(gen), dist(gen));
     }
 }
