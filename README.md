@@ -53,3 +53,13 @@ They have unique keybindings, documented below.
 * `Backspace`: Deletes selected polygon.
 * `Esc`: Cancels selection.
 * `Home`: Resets a polygon transform.
+
+# Lessons learned
+
+Having a `render` method on `ars::Object` and on `ars::World` was probably a bad
+idea.  It “stains” two classes with OpenGL details instead of containing it on a
+single `renderer` object.
+
+It may be not so apparent because this is a simple project, but if we had more
+object types and were to replace OpenGL immediate mode with modern OpenGL,
+DirectX or any other graphical tool, it would become a problem.

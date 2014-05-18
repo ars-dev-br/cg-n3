@@ -89,6 +89,22 @@ namespace ars {
         isSelected = false;
     }
 
+    Object* Object::selectedObject() {
+        if (isSelected) {
+            return this;
+        }
+
+        for(auto it = std::begin(children); it != std::end(children); ++it) {
+            Object* obj = it->selectedObject();
+
+            if (obj != nullptr) {
+                return obj;
+            }
+        }
+
+        return nullptr;
+    }
+
     void Object::resetTransform() {
         transform = Transform();
     }

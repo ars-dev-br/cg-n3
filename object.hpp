@@ -95,6 +95,12 @@ namespace ars {
         void deselect();
 
         /**
+         * Returns this object if it's selected or one of its children if
+         * it's selected.  Returns nullptr otherwise.
+         */
+        Object* selectedObject();
+
+        /**
          * Resets this object transform back to identity.
          */
         void resetTransform();

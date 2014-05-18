@@ -85,7 +85,22 @@ namespace ars {
     }
 
     void World::addSketchObject() {
-        objects.push_back(*sketch);
+        Object* parent = nullptr;
+        for(auto it = std::begin(objects); it != std::end(objects); ++it) {
+            Object* obj = it->selectedObject();
+
+            if (obj != nullptr) {
+                parent = obj;
+                break;
+            }
+        }
+
+        if (parent != nullptr) {
+            parent->addChild(*sketch);
+        } else {
+            objects.push_back(*sketch);
+        }
+
         delete sketch;
         sketch = nullptr;
     }
