@@ -6,10 +6,10 @@
 #ifndef ARS_APPLICATION_STATE_HPP
 #define ARS_APPLICATION_STATE_HPP
 
-#include "point.hpp"
-#include "world.hpp"
-
 namespace ars {
+
+    class Point;
+    class World;
 
     /**
      * @brief Abstract class for application handlers that depend on state.

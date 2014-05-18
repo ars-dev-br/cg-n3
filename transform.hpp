@@ -6,9 +6,9 @@
 #ifndef ARS_TRANSFORM_HPP
 #define ARS_TRANSFORM_HPP
 
-#include "point.hpp"
-
 namespace ars {
+
+    class Point;
 
     /**
      * @brief A linear transform.

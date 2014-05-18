@@ -7,11 +7,12 @@
 #define ARS_WORLD_HPP
 
 #include "object.hpp"
-#include "point.hpp"
 
 #include <vector>
 
 namespace ars {
+
+    class Point;
 
     /**
      * @brief The graphical world.

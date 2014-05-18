@@ -7,10 +7,12 @@
 #define ARS_EDITION_STATE_HPP
 
 #include "application_state.hpp"
-#include "point.hpp"
-#include "world.hpp"
 
 namespace ars {
+
+    class Object;
+    class Point;
+    class World;
 
     /**
      * @brief Application handler used when on edition state.
