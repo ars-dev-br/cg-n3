@@ -92,8 +92,10 @@ namespace ars {
 
     Object* World::objectUnder(const Point& point) {
         for(auto it = std::begin(objects); it != std::end(objects); ++it) {
-            if (it->contains(point)) {
-                return &(*it);
+            Object* obj = it->contains(point);
+
+            if (obj != nullptr) {
+                return obj;
             }
         }
 
@@ -101,6 +103,12 @@ namespace ars {
     }
 
     void World::removeObject(const Object& object) {
-        std::remove(std::begin(objects), std::end(objects), object);
+        for(auto it = std::begin(objects); it != std::end(objects); ++it) {
+            it->removeChild(object);
+        }
+
+        objects.erase(
+            std::remove(std::begin(objects), std::end(objects), object),
+            std::end(objects));
     }
 }

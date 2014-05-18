@@ -106,8 +106,19 @@ namespace ars {
     }
 
     void Object::removePoint(const Point& point) {
-        std::remove(std::begin(points), std::end(points), point);
+        points.erase(std::remove(std::begin(points), std::end(points), point),
+                     std::end(points));
         updateBBox();
+    }
+
+    void Object::removeChild(const Object& child) {
+        for(auto it = std::begin(children); it != std::end(children); ++it) {
+            it->removeChild(child);
+        }
+
+        children.erase(
+            std::remove(std::begin(children), std::end(children), child),
+            std::end(children));
     }
 
     Point* Object::pointNear(const Point& point) {
@@ -124,9 +135,17 @@ namespace ars {
         bbox.update(points);
     }
 
-    bool Object::contains(const Point& point) {
+    Object* Object::contains(const Point& point) {
+        for(auto it = std::begin(children); it != std::end(children); ++it) {
+            Object* obj = it->contains(point);
+
+            if(obj != nullptr) {
+                return obj;
+            }
+        }
+
         if (!bbox.contains(point)) {
-            return false;
+            return nullptr;
         }
 
         int intersections = 0;
@@ -141,18 +160,18 @@ namespace ars {
                                 point.y);
 
                 if (intersect.x == point.x) {
-                    return true;
+                    return this;
                 } else if (intersect.x > point.x && t >= 0 && t <= 1) {
                     ++intersections;
                 }
             } else if (objPointA.y == point.y
                        && point.x >= std::min(objPointA.x, objPointB.x)
                        && point.x <= std::max(objPointA.x, objPointB.x)) {
-                return true;
+                return this;
             }
         }
 
-        return intersections % 2 != 0;
+        return intersections % 2 != 0 ? this : nullptr;
     }
 
     // For keeping things fast, we consider two objects to be equal if

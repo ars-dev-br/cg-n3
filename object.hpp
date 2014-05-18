@@ -115,6 +115,11 @@ namespace ars {
         void removePoint(const Point& point);
 
         /**
+         * Removes a child object that equals the parameter.
+         */
+        void removeChild(const Object& child);
+
+        /**
          * Returns a point near to a given point.  It may return nullptr if
          * no point was selected.
          */
@@ -126,9 +131,11 @@ namespace ars {
         void updateBBox();
 
         /**
-         * Checks if a given point is inside the object.
+         * Checks if a given point is inside the object.  It may return one of
+         * the object children, `this` or `nullptr`.  Notice that children
+         * objects have higher precedence.
          */
-        bool contains(const Point& point);
+        Object* contains(const Point& point);
 
         /**
          * Comparates two objects for equality.
